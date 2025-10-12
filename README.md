@@ -34,3 +34,18 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Seeding test data
+
+To create test users (admin and operator) and sample nodes/edges run the seed script. Make sure `MONGODB_URI` is set in your environment.
+
+```powershell
+npx ts-node scripts/seed-users.ts
+```
+
+Seeded users:
+
+- admin@riwama.gov.ng / Admin123 (role: admin)
+- operator@riwama.gov.ng / Operator123 (role: operator)
+
+Sign in at `/signin` and `/signup` (signup will create new users).
