@@ -37,9 +37,14 @@ export default function SignInPage() {
     // fetch session to get role and redirect client-side
     const resp = await fetch("/api/auth/session");
     const json = await resp.json();
+    console.log("Session data:", json);
     const role = json?.user?.role;
-    if (role === "admin") router.push("/admin/dashboard");
-    else router.push("/operator/dashboard");
+    console.log("User role:", role);
+    if (role === "admin") {
+      router.push("/admin/dashboard");
+    } else {
+      router.push("/operator/dashboard");
+    }
   }
 
   return (

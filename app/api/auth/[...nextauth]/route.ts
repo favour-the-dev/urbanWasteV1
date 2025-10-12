@@ -39,14 +39,13 @@ const handler = NextAuth({
       (session as any).user.role = token.role;
       return session;
     },
-    // async redirect({ url, baseUrl }) {
-    //   return baseUrl;
-    // },
-    async redirect({ url, baseUrl, token }) {
-  if (token?.role === "admin") return "/admin/dashboard";
-  if (token?.role === "operator") return "/operator/dashboard";
-  return baseUrl;
-}
+    async redirect({ url, baseUrl }) {
+      console.log("Redirecting to:", url, "baseUrl: ", baseUrl);
+      return baseUrl;
+    },
+  },
+  pages: {
+    signIn: "/signin",
   },
   secret: process.env.NEXTAUTH_SECRET || "dev-secret",
 });

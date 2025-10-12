@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { verifyToken } from "./lib/auth";
+import { getToken } from "next-auth/jwt";
 
-export function middleware(req: NextRequest) {
+export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   // allow public files and api
@@ -10,21 +10,18 @@ export function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
-  const tokenCookie = req.cookies.get("next-auth.session-token") || req.cookies.get("__Secure-next-auth.session-token");
-  const token = tokenCookie ? String(tokenCookie.value || tokenCookie) : null;
-  const payload = token ? verifyToken(token) : null;
-
-  const role = payload?.role as string | undefined;
+  const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
+  const role = (token as any)?.role as string | undefined;
 
   if (pathname.startsWith("/admin")) {
     if (role !== "admin") {
-      return NextResponse.redirect(new URL("/api/auth/signin", req.url));
+      return NextResponse.redirect(new URL("/signin", req.url));
     }
   }
 
   if (pathname.startsWith("/operator")) {
     if (role !== "operator") {
-      return NextResponse.redirect(new URL("/api/auth/signin", req.url));
+      return NextResponse.redirect(new URL("/signin", req.url));
     }
   }
 
