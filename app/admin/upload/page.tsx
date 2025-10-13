@@ -12,7 +12,7 @@ import Card from "../../../components/ui/Card";
 import Button from "../../../components/ui/Button";
 import Modal from "../../../components/ui/Modal";
 import NodeForm from "../../../components/forms/NodeForm";
-import MapView from "../../../components/maps/MapView";
+import MapView from "../../../components/maps/DynamicMap";
 import toast from "react-hot-toast";
 import { useGraphStore } from "../../../lib/store";
 

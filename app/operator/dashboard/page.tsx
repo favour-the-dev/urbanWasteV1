@@ -12,7 +12,7 @@ import {
   AlertCircle,
   Truck,
 } from "lucide-react";
-import MapView from "../../../components/maps/MapView";
+import MapView from "../../../components/maps/DynamicMap";
 import Card from "../../../components/ui/Card";
 import Button from "../../../components/ui/Button";
 import toast from "react-hot-toast";
@@ -133,7 +133,9 @@ export default function OperatorDashboard() {
         </div>
         <div className="flex items-center gap-3 text-sm text-gray-600">
           <Clock className="w-4 h-4" />
-          <span>{new Date().toLocaleDateString()}</span>
+          <span suppressHydrationWarning>
+            {new Date().toLocaleDateString()}
+          </span>
         </div>
       </div>
 
