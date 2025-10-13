@@ -32,11 +32,13 @@ const handler = NextAuth({
     async jwt({ token, user }) {
       if (user) {
         token.role = (user as any).role;
+        (token as any).userId = (user as any).id;
       }
       return token;
     },
     async session({ session, token }) {
       (session as any).user.role = token.role;
+      (session as any).user.id = (token as any).userId ?? (token as any).sub;
       return session;
     },
     async redirect({ url, baseUrl }) {

@@ -1,0 +1,110 @@
+"use client";
+import Link from "next/link";
+import { ReactNode } from "react";
+import { usePathname } from "next/navigation";
+import { signOut, useSession } from "next-auth/react";
+import {
+  LayoutDashboard,
+  Upload,
+  Route,
+  BarChart3,
+  Settings,
+  LogOut,
+  Shield,
+  Trash2,
+} from "lucide-react";
+
+const navigation = [
+  { name: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
+  { name: "Upload Data", href: "/admin/upload", icon: Upload },
+  { name: "Routes", href: "/admin/routes", icon: Route },
+  { name: "Analytics", href: "/admin/analytics", icon: BarChart3 },
+  { name: "Settings", href: "/admin/settings", icon: Settings },
+];
+
+export default function AdminLayout({ children }: { children: ReactNode }) {
+  const pathname = usePathname();
+  const { data: session } = useSession();
+
+  function handleSignOut() {
+    signOut({ callbackUrl: "/signin" });
+  }
+
+  return (
+    <div className="min-h-screen flex flex-col md:flex-row bg-gray-50">
+      {/* Sidebar */}
+      <div className="md:fixed inset-y-0 left-0 md:w-64 bg-white border-r border-gray-200 shadow-sm">
+        <div className="flex flex-col h-full">
+          {/* Logo */}
+          <div className="flex items-center gap-3 px-6 py-6 border-b border-gray-200">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
+              <Trash2 className="w-5 h-5 text-white" />
+            </div>
+            <div>
+              <h1 className="text-lg font-bold text-gray-900">UrbanWaste</h1>
+              <p className="text-xs text-emerald-600 font-medium">
+                Admin Panel
+              </p>
+            </div>
+          </div>
+
+          {/* Navigation */}
+          <nav className="flex-1 px-4 py-6 space-y-2">
+            {navigation.map((item) => {
+              const isActive = pathname === item.href;
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={`
+                    group flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-xl transition-all duration-200
+                    ${
+                      isActive
+                        ? "bg-emerald-50 text-emerald-700 shadow-sm"
+                        : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+                    }
+                  `}
+                >
+                  <item.icon
+                    className={`w-5 h-5 ${
+                      isActive
+                        ? "text-emerald-600"
+                        : "text-gray-400 group-hover:text-gray-600"
+                    }`}
+                  />
+                  {item.name}
+                </Link>
+              );
+            })}
+          </nav>
+
+          {/* User Profile */}
+          <div className="p-4 border-t border-gray-200">
+            <div className="flex items-center gap-3 p-3 rounded-xl bg-gray-50">
+              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                <Shield className="w-5 h-5 text-white" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-gray-900 truncate">
+                  {session?.user?.name || "Admin User"}
+                </p>
+                <p className="text-xs text-gray-500">Administrator</p>
+              </div>
+            </div>
+
+            <button
+              onClick={handleSignOut}
+              className="w-full mt-3 flex items-center gap-3 px-3 py-2 text-sm font-medium text-red-600 hover:text-red-700 hover:bg-red-50 rounded-xl transition-all duration-200"
+            >
+              <LogOut className="w-4 h-4" />
+              Sign Out
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="flex-1 md:pl-64">{children}</div>
+    </div>
+  );
+}
