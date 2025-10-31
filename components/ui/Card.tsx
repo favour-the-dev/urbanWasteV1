@@ -1,28 +1,38 @@
 interface CardProps {
-  children: React.ReactNode;
-  className?: string;
-  hover?: boolean;
+    children: React.ReactNode;
+    className?: string;
+    hover?: boolean;
+    padding?: "none" | "sm" | "md" | "lg";
 }
 
 export default function Card({
-  children,
-  className = "",
-  hover = false,
+    children,
+    className = "",
+    hover = false,
+    padding = "md",
 }: CardProps) {
-  return (
-    <div
-      className={`
-      relative bg-white/90 backdrop-blur-sm border border-gray-100 rounded-xl shadow-sm
+    const paddingClasses = {
+        none: "",
+        sm: "p-4",
+        md: "p-6",
+        lg: "p-8",
+    };
+
+    return (
+        <div
+            className={`
+      bg-white border border-slate-200 rounded-2xl shadow-sm
+      transition-all duration-200
       ${
-        hover
-          ? "hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
-          : ""
+          hover
+              ? "hover:shadow-md hover:-translate-y-0.5 hover:border-emerald-200"
+              : ""
       }
+      ${paddingClasses[padding]}
       ${className}
     `}
-    >
-      <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent rounded-xl" />
-      <div className="relative p-6">{children}</div>
-    </div>
-  );
+        >
+            {children}
+        </div>
+    );
 }

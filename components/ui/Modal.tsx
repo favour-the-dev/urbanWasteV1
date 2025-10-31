@@ -1,7 +1,6 @@
 "use client";
 import { ReactNode, useEffect } from "react";
 import { X } from "lucide-react";
-import Button from "./Button";
 
 interface ModalProps {
     isOpen: boolean;
@@ -9,6 +8,7 @@ interface ModalProps {
     title: string;
     children: ReactNode;
     size?: "sm" | "md" | "lg" | "xl";
+    footer?: ReactNode;
 }
 
 export default function Modal({
@@ -17,6 +17,7 @@ export default function Modal({
     title,
     children,
     size = "md",
+    footer,
 }: ModalProps) {
     useEffect(() => {
         if (isOpen) {
@@ -44,34 +45,39 @@ export default function Modal({
             <div className="flex min-h-full items-center justify-center p-4">
                 {/* Backdrop */}
                 <div
-                    className="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity"
+                    className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity"
                     onClick={onClose}
                 />
 
                 {/* Modal */}
                 <div
                     className={`
-            relative w-full ${sizeClasses[size]} bg-white rounded-2xl shadow-2xl 
-            border border-gray-200 transition-all duration-300 transform
+            relative w-full ${sizeClasses[size]} bg-white rounded-2xl shadow-xl 
+            border border-slate-200 transition-all duration-200 transform
           `}
                 >
                     {/* Header */}
-                    <div className="flex items-center justify-between p-6 border-b border-gray-200">
-                        <h2 className="text-xl font-semibold text-gray-900">
+                    <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 bg-slate-50 rounded-t-2xl">
+                        <h2 className="text-xl font-semibold text-slate-900">
                             {title}
                         </h2>
-                        <Button
-                            variant="ghost"
-                            size="sm"
+                        <button
                             onClick={onClose}
-                            className="text-gray-400 hover:text-gray-600"
+                            className="p-2 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors"
                         >
-                            <X className="w-4 h-4" />
-                        </Button>
+                            <X className="w-5 h-5" />
+                        </button>
                     </div>
 
                     {/* Content */}
-                    <div className="p-6">{children}</div>
+                    <div className="px-6 py-4">{children}</div>
+
+                    {/* Footer */}
+                    {footer && (
+                        <div className="px-6 py-4 border-t border-slate-200 bg-slate-50 rounded-b-2xl">
+                            {footer}
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

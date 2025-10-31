@@ -1,0 +1,144 @@
+{
+    "info": {
+        "name": "UrbanWasteV1 API",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Auth - Sign In",
+            "request": {
+                "method": "POST",
+                "header": [
+                    { "key": "Content-Type", "value": "application/json" }
+                ],
+                "url": {
+                    "raw": "{{baseUrl}}/api/auth/[...nextauth]",
+                    "host": ["{{baseUrl}}"],
+                    "path": ["api", "auth", "[...nextauth]"]
+                },
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"csrfToken\": \"\",\n  \"email\": \"admin@riwama.gov.ng\",\n  \"password\": \"Admin123\"\n}"
+                }
+            }
+        },
+        {
+            "name": "Auth - Sign Up",
+            "request": {
+                "method": "POST",
+                "header": [
+                    { "key": "Content-Type", "value": "application/json" }
+                ],
+                "url": {
+                    "raw": "{{baseUrl}}/api/auth/signup",
+                    "host": ["{{baseUrl}}"],
+                    "path": ["api", "auth", "signup"]
+                },
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"name\": \"Citizen\",\n  \"email\": \"citizen@example.com\",\n  \"password\": \"Citizen123\",\n  \"role\": \"citizen\"\n}"
+                }
+            }
+        },
+        {
+            "name": "Admin - Graph (weighted)",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "{{baseUrl}}/api/admin/graph?weighted=1",
+                    "host": ["{{baseUrl}}"],
+                    "path": ["api", "admin", "graph"],
+                    "query": [{ "key": "weighted", "value": "1" }]
+                }
+            }
+        },
+        {
+            "name": "Routes - Compute",
+            "request": {
+                "method": "POST",
+                "header": [
+                    { "key": "Content-Type", "value": "application/json" }
+                ],
+                "url": {
+                    "raw": "{{baseUrl}}/api/routes/compute",
+                    "host": ["{{baseUrl}}"],
+                    "path": ["api", "routes", "compute"]
+                },
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"graph\": {\n    \"A\": {\"B\": 1},\n    \"B\": {\"A\": 1, \"C\": 2},\n    \"C\": {\"B\": 2}\n  },\n  \"start\": \"A\",\n  \"end\": \"C\"\n}"
+                }
+            }
+        },
+        {
+            "name": "Reports - List",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "{{baseUrl}}/api/reports",
+                    "host": ["{{baseUrl}}"],
+                    "path": ["api", "reports"]
+                }
+            }
+        },
+        {
+            "name": "Reports - Create",
+            "request": {
+                "method": "POST",
+                "header": [
+                    { "key": "Content-Type", "value": "application/json" }
+                ],
+                "url": {
+                    "raw": "{{baseUrl}}/api/reports",
+                    "host": ["{{baseUrl}}"],
+                    "path": ["api", "reports"]
+                },
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"citizenId\": \"{{citizenId}}\",\n  \"type\": \"Road Block\",\n  \"description\": \"Road blocked near market\",\n  \"coordinates\": {\n    \"latitude\": 4.785,\n    \"longitude\": 7.033\n  },\n  \"priority\": \"urgent\"\n}"
+                }
+            }
+        },
+        {
+            "name": "Admin - Assign Route",
+            "request": {
+                "method": "POST",
+                "header": [
+                    { "key": "Content-Type", "value": "application/json" }
+                ],
+                "url": {
+                    "raw": "{{baseUrl}}/api/admin/operators",
+                    "host": ["{{baseUrl}}"],
+                    "path": ["api", "admin", "operators"]
+                },
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"operatorId\": \"{{operatorId}}\",\n  \"nodeNames\": [\"Point A\", \"Point B\"],\n  \"totalDistance\": 2.2\n}"
+                }
+            }
+        },
+        {
+            "name": "Weather",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "{{baseUrl}}/api/weather",
+                    "host": ["{{baseUrl}}"],
+                    "path": ["api", "weather"]
+                }
+            }
+        },
+        {
+            "name": "Analytics - Export CSV",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "{{baseUrl}}/api/admin/analytics/export",
+                    "host": ["{{baseUrl}}"],
+                    "path": ["api", "admin", "analytics", "export"]
+                }
+            }
+        }
+    ],
+    "variable": [{ "key": "baseUrl", "value": "http://localhost:3000" }]
+}

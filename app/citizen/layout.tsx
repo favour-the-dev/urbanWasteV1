@@ -4,28 +4,23 @@ import { ReactNode, useState } from "react";
 import { usePathname } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
 import {
-    LayoutDashboard,
-    Upload,
-    Route,
-    BarChart3,
-    Settings,
+    Home,
+    FileText,
+    AlertCircle,
     LogOut,
-    Shield,
+    User,
     Trash2,
     Menu,
     X,
-    AlertCircle,
 } from "lucide-react";
 
 const navigation = [
-    { name: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
-    { name: "Upload Data", href: "/admin/upload", icon: Upload },
-    { name: "Routes", href: "/admin/routes", icon: Route },
-    { name: "Reports", href: "/admin/reports", icon: AlertCircle },
-    { name: "Analytics", href: "/admin/analytics", icon: BarChart3 },
+    { name: "Dashboard", href: "/citizen/dashboard", icon: Home },
+    { name: "Submit Report", href: "/citizen/report", icon: AlertCircle },
+    { name: "My Reports", href: "/citizen/reports", icon: FileText },
 ];
 
-export default function AdminLayout({ children }: { children: ReactNode }) {
+export default function CitizenLayout({ children }: { children: ReactNode }) {
     const pathname = usePathname();
     const { data: session } = useSession();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -48,7 +43,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
                                 UrbanWaste
                             </h1>
                             <p className="text-xs text-emerald-600 font-medium">
-                                Admin
+                                Citizen
                             </p>
                         </div>
                     </div>
@@ -94,7 +89,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
                                 UrbanWaste
                             </h1>
                             <p className="text-xs text-emerald-600 font-medium">
-                                Admin Panel
+                                Citizen Portal
                             </p>
                         </div>
                     </div>
@@ -110,7 +105,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
                                     UrbanWaste
                                 </h1>
                                 <p className="text-xs text-emerald-600 font-medium">
-                                    Admin Panel
+                                    Citizen Portal
                                 </p>
                             </div>
                         </div>
@@ -156,15 +151,15 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
                     {/* User Profile */}
                     <div className="p-4 border-t border-slate-200">
                         <div className="flex items-center gap-3 p-3 rounded-xl bg-slate-50">
-                            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                                <Shield className="w-5 h-5 text-white" />
+                            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
+                                <User className="w-5 h-5 text-white" />
                             </div>
                             <div className="flex-1 min-w-0">
                                 <p className="text-sm font-medium text-slate-900 truncate">
-                                    {session?.user?.name || "Admin User"}
+                                    {session?.user?.name || "Citizen"}
                                 </p>
                                 <p className="text-xs text-slate-500">
-                                    Administrator
+                                    Citizen
                                 </p>
                             </div>
                         </div>

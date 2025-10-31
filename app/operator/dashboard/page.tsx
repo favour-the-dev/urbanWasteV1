@@ -54,33 +54,25 @@ export default function OperatorDashboard() {
     const [isUpdating, setIsUpdating] = useState(false);
     const [loading, setLoading] = useState(true);
 
+    const fetchRoute = async (operatorId: string) => {
+        const res = await fetch(`/api/operator/route?operatorId=${operatorId}`);
+        const json = await res.json();
+        if (!json.success) {
+            toast.error(json.error || "Failed to load assigned route");
+        }
+        setRoute(json.data || null);
+        setCoords((json.data?.nodes || []).map((n: NodeDoc) => n.coordinates));
+    };
+
     useEffect(() => {
         (async () => {
             try {
                 const operatorId = (session as any)?.user?.id;
-
                 if (!operatorId) {
-                    console.log("No operator ID found in session");
                     setLoading(false);
                     return;
                 }
-
-                console.log("Fetching route for operator:", operatorId);
-                const res = await fetch(
-                    `/api/operator/route?operatorId=${operatorId}`
-                );
-                const json = await res.json();
-
-                console.log("Route fetch response:", json);
-
-                if (!json.success) {
-                    toast.error(json.error || "Failed to load assigned route");
-                }
-
-                setRoute(json.data || null);
-                setCoords(
-                    (json.data?.nodes || []).map((n: NodeDoc) => n.coordinates)
-                );
+                await fetchRoute(operatorId);
             } catch (e: any) {
                 console.error("Route fetch error:", e);
                 toast.error("Failed to load assigned route");
@@ -89,6 +81,17 @@ export default function OperatorDashboard() {
             }
         })();
     }, [session]);
+
+    // Poll for updates every 15s when route isn't completed
+    useEffect(() => {
+        const operatorId = (session as any)?.user?.id;
+        if (!operatorId) return;
+        if (route?.status === "completed") return;
+        const id = setInterval(() => {
+            fetchRoute(operatorId).catch(() => {});
+        }, 15000);
+        return () => clearInterval(id);
+    }, [session, route?.status]);
 
     const onStatus = async (status: "active" | "completed") => {
         if (!route?._id) return;
@@ -126,9 +129,9 @@ export default function OperatorDashboard() {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-gradient-to-br from-blue-50/50 via-white to-emerald-50/50 p-6 flex items-center justify-center">
+            <div className="min-h-screen bg-gradient-to-br from-emerald-50/50 via-white to-teal-50/50 p-6 flex items-center justify-center">
                 <div className="text-center">
-                    <div className="w-16 h-16 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin mx-auto mb-4"></div>
+                    <div className="w-16 h-16 border-4 border-emerald-200 border-t-emerald-600 rounded-full animate-spin mx-auto mb-4"></div>
                     <p className="text-gray-600">Loading your route...</p>
                 </div>
             </div>
@@ -141,11 +144,11 @@ export default function OperatorDashboard() {
         statusConfig.pending;
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50/50 via-white to-emerald-50/50 p-6 space-y-8">
+        <div className="min-h-screen bg-gradient-to-br from-emerald-50/50 via-white to-teal-50/50 p-6 space-y-8">
             {/* Header */}
             <div className="flex items-center justify-between">
                 <div>
-                    <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent">
+                    <h1 className="text-3xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
                         My Route
                     </h1>
                     <p className="text-gray-600 mt-1">
@@ -215,8 +218,8 @@ export default function OperatorDashboard() {
                                         {route.nodes?.length || 0}
                                     </p>
                                 </div>
-                                <div className="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center">
-                                    <MapPin className="w-6 h-6 text-blue-600" />
+                                <div className="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center">
+                                    <MapPin className="w-6 h-6 text-emerald-600" />
                                 </div>
                             </div>
                         </Card>
@@ -241,7 +244,7 @@ export default function OperatorDashboard() {
                     {/* Route Actions */}
                     <Card className="p-8">
                         <div className="flex items-center gap-3 mb-6">
-                            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-emerald-600 flex items-center justify-center">
+                            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
                                 <Truck className="w-5 h-5 text-white" />
                             </div>
                             <div>
@@ -260,7 +263,7 @@ export default function OperatorDashboard() {
                                     onClick={() => onStatus("active")}
                                     loading={isUpdating}
                                     size="lg"
-                                    className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800"
+                                    className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700"
                                 >
                                     <Play className="w-4 h-4" />
                                     Start Route
@@ -314,7 +317,7 @@ export default function OperatorDashboard() {
                     {route.nodes && route.nodes.length > 0 && (
                         <Card className="p-8">
                             <div className="flex items-center gap-3 mb-6">
-                                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center">
+                                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
                                     <MapPin className="w-5 h-5 text-white" />
                                 </div>
                                 <div>

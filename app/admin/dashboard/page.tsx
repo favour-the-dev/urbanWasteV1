@@ -9,10 +9,12 @@ import {
     Clock,
     CheckCircle,
     Navigation,
+    AlertCircle,
 } from "lucide-react";
 import MapView from "../../../components/maps/DynamicMap";
 import Card from "../../../components/ui/Card";
 import Button from "../../../components/ui/Button";
+import WeatherWidget from "../../../components/widgets/WeatherWidget";
 import toast from "react-hot-toast";
 
 type NodeDoc = { _id: string; name: string; coordinates: [number, number] };
@@ -30,6 +32,7 @@ export default function AdminDashboard() {
     const [isComputing, setIsComputing] = useState(false);
     const [isAssigning, setIsAssigning] = useState(false);
     const [edgesCount, setEdgesCount] = useState(0);
+    const [reportsStats, setReportsStats] = useState({ total: 0, pending: 0 });
 
     useEffect(() => {
         (async () => {
@@ -41,8 +44,21 @@ export default function AdminDashboard() {
                 const opsRes = await fetch("/api/admin/operators");
                 const ops = await opsRes.json();
                 setOperators(ops.data || []);
+
+                // Fetch reports stats
+                const reportsRes = await fetch("/api/reports");
+                const reportsData = await reportsRes.json();
+                if (reportsData.success) {
+                    const reports = reportsData.reports || [];
+                    setReportsStats({
+                        total: reports.length,
+                        pending: reports.filter(
+                            (r: any) => r.status === "pending"
+                        ).length,
+                    });
+                }
             } catch (e) {
-                toast.error("Failed to load graph");
+                toast.error("Failed to load dashboard data");
             }
         })();
     }, []);
@@ -55,58 +71,13 @@ export default function AdminDashboard() {
 
         setIsComputing(true);
         try {
-            const graph: Record<string, Record<string, number>> = {};
-            // fetch edges from API
-            const res = await fetch("/api/admin/graph");
+            // Fetch weighted graph
+            const res = await fetch("/api/admin/graph?weighted=1");
             const data = await res.json();
-            const edges: Array<{ fromNode: any; toNode: any; weight: number }> =
-                data.edges || [];
 
-            // Check if we have edges
-            if (edges.length === 0) {
+            if (!data?.graph) {
                 toast.error(
                     "No connections found! Please upload network data with edges first."
-                );
-                setIsComputing(false);
-                return;
-            }
-
-            const idToName = new Map<string, string>();
-            const idToCoord = new Map<string, [number, number]>();
-            (data.nodes || []).forEach((n: NodeDoc) => {
-                idToName.set(n._id, n.name);
-                idToCoord.set(n._id, n.coordinates);
-            });
-
-            // build graph using node names as keys
-            (data.nodes || []).forEach((n: NodeDoc) => (graph[n.name] = {}));
-            edges.forEach((e: any) => {
-                // Handle both populated and non-populated edge references
-                const fromId =
-                    typeof e.fromNode === "string"
-                        ? e.fromNode
-                        : e.fromNode?._id;
-                const toId =
-                    typeof e.toNode === "string" ? e.toNode : e.toNode?._id;
-
-                const a = idToName.get(fromId);
-                const b = idToName.get(toId);
-
-                if (a && b) {
-                    if (!graph[a]) graph[a] = {};
-                    if (!graph[b]) graph[b] = {};
-                    graph[a][b] = e.weight;
-                    graph[b][a] = e.weight;
-                }
-            });
-
-            // Check if the graph has connections
-            const hasConnections = Object.values(graph).some(
-                (neighbors) => Object.keys(neighbors).length > 0
-            );
-            if (!hasConnections) {
-                toast.error(
-                    "Graph has no valid connections! Please check your network data."
                 );
                 setIsComputing(false);
                 return;
@@ -115,7 +86,7 @@ export default function AdminDashboard() {
             const resp = await fetch("/api/routes/compute", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ graph, start, end }),
+                body: JSON.stringify({ graph: data.graph, start, end }),
             });
 
             if (!resp.ok) {
@@ -142,8 +113,9 @@ export default function AdminDashboard() {
             const coords: [number, number][] = namesPath
                 .map(
                     (name: string) =>
-                        (data.nodes as NodeDoc[]).find((n) => n.name === name)
-                            ?.coordinates
+                        (data.nodes as NodeDoc[]).find(
+                            (n: NodeDoc) => n.name === name
+                        )?.coordinates
                 )
                 .filter(Boolean) as [number, number][];
             setRoutePath(coords);
@@ -290,6 +262,65 @@ export default function AdminDashboard() {
                         <div className="w-12 h-12 rounded-xl bg-green-100 flex items-center justify-center">
                             <TrendingUp className="w-6 h-6 text-green-600" />
                         </div>
+                    </div>
+                </Card>
+            </div>
+
+            {/* Weather and Reports Row */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {/* Weather Widget */}
+                <WeatherWidget />
+
+                {/* Reports Summary */}
+                <Card className="p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center">
+                            <AlertCircle className="w-5 h-5 text-white" />
+                        </div>
+                        <div>
+                            <h3 className="text-lg font-semibold text-gray-900">
+                                Citizen Reports
+                            </h3>
+                            <p className="text-sm text-gray-600">
+                                Recent community reports
+                            </p>
+                        </div>
+                    </div>
+
+                    <div className="space-y-4">
+                        <div className="flex items-center justify-between p-4 rounded-xl bg-purple-50">
+                            <div>
+                                <p className="text-sm text-gray-600">
+                                    Total Reports
+                                </p>
+                                <p className="text-2xl font-bold text-gray-900">
+                                    {reportsStats.total}
+                                </p>
+                            </div>
+                            <AlertCircle className="w-10 h-10 text-purple-600" />
+                        </div>
+
+                        <div className="flex items-center justify-between p-4 rounded-xl bg-orange-50">
+                            <div>
+                                <p className="text-sm text-gray-600">
+                                    Pending Review
+                                </p>
+                                <p className="text-2xl font-bold text-orange-600">
+                                    {reportsStats.pending}
+                                </p>
+                            </div>
+                            <Clock className="w-10 h-10 text-orange-600" />
+                        </div>
+
+                        <Button
+                            onClick={() =>
+                                (window.location.href = "/admin/reports")
+                            }
+                            className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
+                        >
+                            <AlertCircle className="w-4 h-4" />
+                            View All Reports
+                        </Button>
                     </div>
                 </Card>
             </div>

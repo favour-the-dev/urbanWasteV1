@@ -1,12 +1,28 @@
 import { NextResponse } from "next/server";
 import { computeShortestPath, Graph } from "../../../..//lib/dijkstra";
+import { z } from "zod";
+
+const computeSchema = z.object({
+    graph: z.record(z.string(), z.record(z.string(), z.number().min(0))),
+    start: z.string().min(1),
+    end: z.string().min(1),
+});
 
 export async function POST(req: Request) {
     try {
         const body = await req.json();
-        const graph = body.graph as Graph;
-        const start = body.start as string;
-        const end = body.end as string;
+        const parsed = computeSchema.safeParse(body);
+        if (!parsed.success) {
+            return NextResponse.json(
+                { error: parsed.error.flatten() },
+                { status: 400 }
+            );
+        }
+        const { graph, start, end } = parsed.data as unknown as {
+            graph: Graph;
+            start: string;
+            end: string;
+        };
 
         if (!graph || !start || !end) {
             return NextResponse.json(

@@ -2,16 +2,42 @@ import { NextRequest, NextResponse } from "next/server";
 import { connectToDB } from "../../../../lib/db";
 import NodeModel from "../../../../models/Node";
 import EdgeModel from "../../../../models/Edge";
+import { z } from "zod";
+
+const uploadSchema = z.object({
+    nodes: z
+        .array(
+            z.object({
+                name: z.string().min(1),
+                coordinates: z
+                    .array(z.number())
+                    .length(2, "coordinates must be [lat, lon]") as any,
+            })
+        )
+        .optional(),
+    edges: z
+        .array(
+            z.object({
+                from: z.string().min(1),
+                to: z.string().min(1),
+                weight: z.number().positive(),
+            })
+        )
+        .optional(),
+});
 
 export async function POST(req: NextRequest) {
     try {
         await connectToDB();
         const body = await req.json();
-
-        const { nodes, edges } = body as {
-            nodes: Array<{ name: string; coordinates: [number, number] }>;
-            edges: Array<{ from: string; to: string; weight: number }>;
-        };
+        const parsed = uploadSchema.safeParse(body);
+        if (!parsed.success) {
+            return NextResponse.json(
+                { success: false, error: parsed.error.flatten() },
+                { status: 400 }
+            );
+        }
+        const { nodes, edges } = parsed.data as any;
 
         // Validate: must have nodes or edges
         if (!Array.isArray(nodes) && !Array.isArray(edges)) {

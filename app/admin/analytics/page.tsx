@@ -9,6 +9,27 @@ import {
     Database,
     Network,
 } from "lucide-react";
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend,
+} from "chart.js";
+import { Line } from "react-chartjs-2";
+
+ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend
+);
 
 type AnalyticsData = {
     totalRoutes: number;
@@ -16,6 +37,7 @@ type AnalyticsData = {
     top5: Array<{ totalDistance: number }>;
     completedLastWeek: number;
     pending: number;
+    trend?: Array<{ day: string; completed: number }>;
 };
 
 type Node = {
@@ -109,8 +131,8 @@ export default function AdminAnalyticsPage() {
                                     : (data?.averageDistance ?? 0).toFixed(2)}
                             </p>
                         </div>
-                        <div className="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center">
-                            <TrendingUp className="w-6 h-6 text-blue-600" />
+                        <div className="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center">
+                            <TrendingUp className="w-6 h-6 text-emerald-600" />
                         </div>
                     </div>
                 </Card>
@@ -139,17 +161,25 @@ export default function AdminAnalyticsPage() {
                                 {loading ? "—" : data?.pending ?? 0}
                             </p>
                         </div>
-                        <div className="w-12 h-12 rounded-xl bg-purple-100 flex items-center justify-center">
-                            <BarChart2 className="w-6 h-6 text-purple-600" />
+                        <div className="w-12 h-12 rounded-xl bg-teal-100 flex items-center justify-center">
+                            <BarChart2 className="w-6 h-6 text-teal-600" />
                         </div>
                     </div>
                 </Card>
             </div>
 
             <Card className="p-6">
-                <h2 className="text-lg font-semibold text-gray-900 mb-4">
-                    Top Routes by Distance
-                </h2>
+                <div className="flex items-center justify-between mb-4">
+                    <h2 className="text-lg font-semibold text-gray-900">
+                        Top Routes by Distance
+                    </h2>
+                    <a
+                        href="/api/admin/analytics/export"
+                        className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-slate-200 hover:border-slate-300 text-sm text-slate-700 hover:text-slate-900 transition-colors"
+                    >
+                        Export CSV
+                    </a>
+                </div>
                 {loading ? (
                     <div className="h-40 flex items-center justify-center text-gray-500">
                         Loading...
@@ -189,6 +219,52 @@ export default function AdminAnalyticsPage() {
                             );
                         })}
                     </div>
+                )}
+            </Card>
+
+            {/* Weekly Completion Trend */}
+            <Card className="p-6">
+                <h2 className="text-lg font-semibold text-gray-900 mb-4">
+                    Weekly Completions
+                </h2>
+                {loading ? (
+                    <div className="h-40 flex items-center justify-center text-gray-500">
+                        Loading...
+                    </div>
+                ) : !data?.trend?.length ? (
+                    <div className="h-40 flex items-center justify-center text-gray-500">
+                        No data available
+                    </div>
+                ) : (
+                    <Line
+                        data={{
+                            labels: data.trend.map((t) => t.day.slice(5)),
+                            datasets: [
+                                {
+                                    label: "Completed",
+                                    data: data.trend.map((t) => t.completed),
+                                    borderColor: "#10b981",
+                                    backgroundColor: "rgba(16,185,129,0.2)",
+                                    tension: 0.3,
+                                },
+                            ],
+                        }}
+                        options={{
+                            responsive: true,
+                            plugins: {
+                                legend: { display: false },
+                            },
+                            scales: {
+                                x: {
+                                    grid: { display: false },
+                                },
+                                y: {
+                                    beginAtZero: true,
+                                    ticks: { stepSize: 1 },
+                                },
+                            },
+                        }}
+                    />
                 )}
             </Card>
 
@@ -273,7 +349,7 @@ export default function AdminAnalyticsPage() {
             {/* Edges/Connections Table */}
             <Card className="p-6">
                 <div className="flex items-center gap-3 mb-6">
-                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center">
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
                         <Network className="w-5 h-5 text-white" />
                     </div>
                     <div>

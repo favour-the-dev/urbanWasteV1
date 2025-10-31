@@ -31,26 +31,26 @@ export default function OperatorLayout({ children }: { children: ReactNode }) {
     }
 
     return (
-        <div className="min-h-screen flex flex-col md:flex-row bg-gray-50">
+        <div className="min-h-screen flex flex-col md:flex-row bg-gradient-to-br from-emerald-50/40 via-white to-teal-50/40">
             {/* Mobile Header */}
-            <div className="md:hidden bg-white border-b border-gray-200 shadow-sm sticky top-0 z-50">
+            <div className="md:hidden bg-white border-b border-slate-200 shadow-sm sticky top-0 z-50">
                 <div className="flex items-center justify-between px-4 py-3">
                     <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-emerald-600 flex items-center justify-center">
+                        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
                             <Trash2 className="w-4 h-4 text-white" />
                         </div>
                         <div>
                             <h1 className="text-base font-bold text-gray-900">
                                 UrbanWaste
                             </h1>
-                            <p className="text-xs text-blue-600 font-medium">
+                            <p className="text-xs text-emerald-600 font-medium">
                                 Operator
                             </p>
                         </div>
                     </div>
                     <button
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                        className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+                        className="p-2 rounded-lg hover:bg-slate-100 transition-colors"
                         aria-label="Toggle menu"
                     >
                         {isMobileMenuOpen ? (
@@ -65,7 +65,7 @@ export default function OperatorLayout({ children }: { children: ReactNode }) {
             {/* Mobile Menu Overlay */}
             {isMobileMenuOpen && (
                 <div
-                    className="md:hidden fixed inset-0 bg-black/50 z-40"
+                    className="md:hidden fixed inset-0 bg-slate-900/50 z-40"
                     onClick={() => setIsMobileMenuOpen(false)}
                 />
             )}
@@ -73,7 +73,7 @@ export default function OperatorLayout({ children }: { children: ReactNode }) {
             {/* Sidebar */}
             <div
                 className={`
-          fixed inset-y-0 left-0 z-50 w-64 bg-white border-r border-gray-200 shadow-lg
+          fixed inset-y-0 left-0 z-50 w-64 bg-white border-r border-slate-200 shadow-lg
           transform transition-transform duration-300 ease-in-out
           md:translate-x-0 md:shadow-sm
           ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"}
@@ -81,38 +81,38 @@ export default function OperatorLayout({ children }: { children: ReactNode }) {
             >
                 <div className="flex flex-col h-full">
                     {/* Logo - Desktop Only */}
-                    <div className="hidden md:flex items-center gap-3 px-6 py-6 border-b border-gray-200">
-                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-emerald-600 flex items-center justify-center">
+                    <div className="hidden md:flex items-center gap-3 px-6 py-6 border-b border-slate-200">
+                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
                             <Trash2 className="w-5 h-5 text-white" />
                         </div>
                         <div>
                             <h1 className="text-lg font-bold text-gray-900">
                                 UrbanWaste
                             </h1>
-                            <p className="text-xs text-blue-600 font-medium">
+                            <p className="text-xs text-emerald-600 font-medium">
                                 Field Operator
                             </p>
                         </div>
                     </div>
 
                     {/* Mobile Close Button */}
-                    <div className="md:hidden flex items-center justify-between px-4 py-4 border-b border-gray-200">
+                    <div className="md:hidden flex items-center justify-between px-4 py-4 border-b border-slate-200">
                         <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-emerald-600 flex items-center justify-center">
+                            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
                                 <Trash2 className="w-5 h-5 text-white" />
                             </div>
                             <div>
                                 <h1 className="text-lg font-bold text-gray-900">
                                     UrbanWaste
                                 </h1>
-                                <p className="text-xs text-blue-600 font-medium">
+                                <p className="text-xs text-emerald-600 font-medium">
                                     Field Operator
                                 </p>
                             </div>
                         </div>
                         <button
                             onClick={() => setIsMobileMenuOpen(false)}
-                            className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+                            className="p-2 rounded-lg hover:bg-slate-100 transition-colors"
                         >
                             <X className="w-5 h-5 text-gray-600" />
                         </button>
@@ -131,16 +131,16 @@ export default function OperatorLayout({ children }: { children: ReactNode }) {
                     group flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-xl transition-all duration-200
                     ${
                         isActive
-                            ? "bg-blue-50 text-blue-700 shadow-sm"
-                            : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+                            ? "bg-emerald-50 text-emerald-700 shadow-sm"
+                            : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
                     }
                   `}
                                 >
                                     <item.icon
                                         className={`w-5 h-5 ${
                                             isActive
-                                                ? "text-blue-600"
-                                                : "text-gray-400 group-hover:text-gray-600"
+                                                ? "text-emerald-600"
+                                                : "text-slate-400 group-hover:text-slate-600"
                                         }`}
                                     />
                                     {item.name}
@@ -150,16 +150,16 @@ export default function OperatorLayout({ children }: { children: ReactNode }) {
                     </nav>
 
                     {/* User Profile */}
-                    <div className="p-4 border-t border-gray-200">
-                        <div className="flex items-center gap-3 p-3 rounded-xl bg-gray-50">
+                    <div className="p-4 border-t border-slate-200">
+                        <div className="flex items-center gap-3 p-3 rounded-xl bg-slate-50">
                             <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
                                 <User className="w-5 h-5 text-white" />
                             </div>
                             <div className="flex-1 min-w-0">
-                                <p className="text-sm font-medium text-gray-900 truncate">
+                                <p className="text-sm font-medium text-slate-900 truncate">
                                     {session?.user?.name || "Operator"}
                                 </p>
-                                <p className="text-xs text-gray-500">
+                                <p className="text-xs text-slate-500">
                                     Field Operator
                                 </p>
                             </div>

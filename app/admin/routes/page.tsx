@@ -92,8 +92,8 @@ export default function AdminRoutesPage() {
 
         setIsComputing(true);
         try {
-            // Build a simple graph object from admin/graph response
-            const res = await fetch("/api/admin/graph");
+            // Fetch weighted graph (weather + reports impact)
+            const res = await fetch("/api/admin/graph?weighted=1");
             const data = await res.json();
 
             const resp = await fetch("/api/routes/compute", {
@@ -256,11 +256,11 @@ export default function AdminRoutesPage() {
                                     </div>
                                 </div>
 
-                                <div className="p-4 rounded-xl bg-blue-50 border border-blue-200">
-                                    <p className="text-xs text-blue-700 mb-2">
+                                <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-200">
+                                    <p className="text-xs text-emerald-700 mb-2">
                                         Route Path
                                     </p>
-                                    <p className="text-sm text-blue-900 font-medium">
+                                    <p className="text-sm text-emerald-900 font-medium">
                                         {routeNodeNames.join(" → ")}
                                     </p>
                                 </div>
@@ -270,7 +270,7 @@ export default function AdminRoutesPage() {
                                         Assign to Operator
                                     </label>
                                     <select
-                                        className="w-full h-12 px-4 rounded-xl border-2 border-gray-200 bg-white hover:border-gray-300 focus:border-blue-500 focus:outline-none transition-colors mb-3"
+                                        className="w-full h-12 px-4 rounded-xl border-2 border-slate-200 bg-white hover:border-slate-300 focus:border-emerald-500 focus:outline-none transition-colors mb-3"
                                         value={selectedOperator}
                                         onChange={(e) =>
                                             setSelectedOperator(e.target.value)
@@ -289,7 +289,7 @@ export default function AdminRoutesPage() {
                                         onClick={onAssignRoute}
                                         loading={isAssigning}
                                         size="lg"
-                                        className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700"
+                                        className="w-full"
                                     >
                                         {isAssigning
                                             ? "Assigning..."
