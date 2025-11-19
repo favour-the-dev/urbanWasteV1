@@ -17,11 +17,11 @@ export default function Navbar() {
                             <Trash2 className="w-5 h-5 text-white" />
                         </div>
                         <div>
-                            <h1 className="text-lg font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
-                                UrbanWaste
+                            <h1 className="text-lg font-bold text-slate-900">
+                                Ecoroute
                             </h1>
                             <p className="text-xs text-slate-500 -mt-0.5">
-                                Smart Collection
+                                Smart Waste Management
                             </p>
                         </div>
                     </Link>

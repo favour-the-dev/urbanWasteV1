@@ -19,7 +19,7 @@ export default function Footer() {
                                 <Trash2 className="w-5 h-5 text-white" />
                             </div>
                             <span className="text-lg font-bold text-white">
-                                UrbanWaste
+                                Ecoroute
                             </span>
                         </div>
                         <p className="text-sm">
@@ -129,7 +129,7 @@ export default function Footer() {
                     transition={{ duration: 0.6 }}
                     className="border-t border-slate-800 pt-8 text-center text-sm"
                 >
-                    <p>© 2025 UrbanWaste. All rights reserved.</p>
+                    <p>© 2025 Ecoroute. All rights reserved.</p>
                 </motion.div>
             </div>
         </footer>

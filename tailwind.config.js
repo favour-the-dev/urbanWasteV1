@@ -66,7 +66,7 @@ module.exports = {
                 info: "#3b82f6",
             },
             fontFamily: {
-                sans: ["Noto Sans", "system-ui", "sans-serif"],
+                sans: ["Inter", "system-ui", "sans-serif"],
                 heading: ["Space Grotesk", "system-ui", "sans-serif"],
                 mono: ["JetBrains Mono", "Fira Code", "monospace"],
             },

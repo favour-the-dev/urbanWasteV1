@@ -179,18 +179,18 @@ export default function AdminDashboard() {
     );
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-emerald-50/50 via-white to-teal-50/50 p-6 space-y-8">
+        <div className="min-h-screen bg-slate-50 p-6 space-y-8">
             {/* Header */}
             <div className="flex items-center justify-between">
                 <div>
-                    <h1 className="text-3xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+                    <h1 className="text-3xl font-bold text-slate-900">
                         Admin Dashboard
                     </h1>
-                    <p className="text-gray-600 mt-1">
+                    <p className="text-slate-600 mt-1">
                         Optimize routes and manage operations
                     </p>
                 </div>
-                <div className="flex items-center gap-3 text-sm text-gray-600">
+                <div className="flex items-center gap-3 text-sm text-slate-600">
                     <Clock className="w-4 h-4" />
                     <span suppressHydrationWarning>
                         {new Date().toLocaleDateString()}
@@ -200,11 +200,13 @@ export default function AdminDashboard() {
 
             {/* KPI Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <Card className="p-3">
+                <Card className="p-6 hover:shadow-md transition-shadow">
                     <div className="flex items-center justify-between">
                         <div>
-                            <p className="text-sm text-gray-600">Total Nodes</p>
-                            <p className="text-2xl font-bold text-gray-900">
+                            <p className="text-sm text-slate-600">
+                                Total Nodes
+                            </p>
+                            <p className="text-2xl font-bold text-slate-900">
                                 {nodes.length}
                             </p>
                         </div>
@@ -214,13 +216,13 @@ export default function AdminDashboard() {
                     </div>
                 </Card>
 
-                <Card className="p-3">
+                <Card className="p-6 hover:shadow-md transition-shadow">
                     <div className="flex items-center justify-between">
                         <div>
-                            <p className="text-sm text-gray-600">
+                            <p className="text-sm text-slate-600">
                                 Active Operators
                             </p>
-                            <p className="text-2xl font-bold text-gray-900">
+                            <p className="text-2xl font-bold text-slate-900">
                                 {operators.length}
                             </p>
                         </div>
@@ -230,13 +232,13 @@ export default function AdminDashboard() {
                     </div>
                 </Card>
 
-                <Card className="p-3">
+                <Card className="p-6 hover:shadow-md transition-shadow">
                     <div className="flex items-center justify-between">
                         <div>
-                            <p className="text-sm text-gray-600">
+                            <p className="text-sm text-slate-600">
                                 Routes Today
                             </p>
-                            <p className="text-2xl font-bold text-gray-900">
+                            <p className="text-2xl font-bold text-slate-900">
                                 -
                             </p>
                         </div>
@@ -246,18 +248,15 @@ export default function AdminDashboard() {
                     </div>
                 </Card>
 
-                <Card className="p-3">
+                <Card className="p-6 hover:shadow-md transition-shadow">
                     <div className="flex items-center justify-between">
                         <div>
-                            <p className="text-sm text-gray-600">Connections</p>
-                            <p className="text-2xl font-bold text-gray-900">
+                            <p className="text-sm text-slate-600">
+                                Connections
+                            </p>
+                            <p className="text-2xl font-bold text-slate-900">
                                 {edgesCount}
                             </p>
-                            {/* {edgesCount === 0 && (
-                                <p className="text-xs text-red-500 mt-1">
-                                    Upload edges!
-                                </p>
-                            )} */}
                         </div>
                         <div className="w-12 h-12 rounded-xl bg-green-100 flex items-center justify-center">
                             <TrendingUp className="w-6 h-6 text-green-600" />
@@ -274,35 +273,35 @@ export default function AdminDashboard() {
                 {/* Reports Summary */}
                 <Card className="p-6">
                     <div className="flex items-center gap-3 mb-4">
-                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center">
-                            <AlertCircle className="w-5 h-5 text-white" />
+                        <div className="w-10 h-10 rounded-xl bg-orange-100 flex items-center justify-center">
+                            <AlertCircle className="w-5 h-5 text-orange-600" />
                         </div>
                         <div>
-                            <h3 className="text-lg font-semibold text-gray-900">
+                            <h3 className="text-lg font-semibold text-slate-900">
                                 Citizen Reports
                             </h3>
-                            <p className="text-sm text-gray-600">
+                            <p className="text-sm text-slate-600">
                                 Recent community reports
                             </p>
                         </div>
                     </div>
 
                     <div className="space-y-4">
-                        <div className="flex items-center justify-between p-4 rounded-xl bg-purple-50">
+                        <div className="flex items-center justify-between p-4 rounded-xl bg-slate-50 border border-slate-200">
                             <div>
-                                <p className="text-sm text-gray-600">
+                                <p className="text-sm text-slate-600">
                                     Total Reports
                                 </p>
-                                <p className="text-2xl font-bold text-gray-900">
+                                <p className="text-2xl font-bold text-slate-900">
                                     {reportsStats.total}
                                 </p>
                             </div>
-                            <AlertCircle className="w-10 h-10 text-purple-600" />
+                            <AlertCircle className="w-10 h-10 text-slate-400" />
                         </div>
 
-                        <div className="flex items-center justify-between p-4 rounded-xl bg-orange-50">
+                        <div className="flex items-center justify-between p-4 rounded-xl bg-orange-50 border border-orange-200">
                             <div>
-                                <p className="text-sm text-gray-600">
+                                <p className="text-sm text-orange-700">
                                     Pending Review
                                 </p>
                                 <p className="text-2xl font-bold text-orange-600">
@@ -316,7 +315,7 @@ export default function AdminDashboard() {
                             onClick={() =>
                                 (window.location.href = "/admin/reports")
                             }
-                            className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
+                            className="w-full"
                         >
                             <AlertCircle className="w-4 h-4" />
                             View All Reports
@@ -326,16 +325,16 @@ export default function AdminDashboard() {
             </div>
 
             {/* Route Computation */}
-            <Card className="p-3 lg:p-8">
+            <Card className="p-6 lg:p-8">
                 <div className="flex items-center gap-3 mb-6">
-                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
+                    <div className="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center">
                         <Calculator className="w-5 h-5 text-white" />
                     </div>
                     <div>
-                        <h2 className="text-xl font-semibold text-gray-900">
+                        <h2 className="text-xl font-semibold text-slate-900">
                             Route Optimization
                         </h2>
-                        <p className="text-gray-600 text-sm">
+                        <p className="text-slate-600 text-sm">
                             Compute optimal paths between collection points
                         </p>
                     </div>
@@ -453,21 +452,21 @@ export default function AdminDashboard() {
             </Card>
 
             {/* Map */}
-            <Card className="p-3 lg:p-8">
+            <Card className="p-6 lg:p-8">
                 <div className="flex items-center gap-3 mb-6">
-                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                    <div className="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center">
                         <MapPin className="w-5 h-5 text-white" />
                     </div>
                     <div>
-                        <h2 className="text-xl font-semibold text-gray-900">
+                        <h2 className="text-xl font-semibold text-slate-900">
                             Interactive Map
                         </h2>
-                        <p className="text-gray-600 text-sm">
+                        <p className="text-slate-600 text-sm">
                             Visualize collection points and optimized routes
                         </p>
                     </div>
                 </div>
-                <div className="rounded-xl overflow-hidden border border-gray-200 shadow-sm">
+                <div className="rounded-xl overflow-hidden border border-slate-200 shadow-sm">
                     <MapView
                         nodes={nodes.map((n) => n.coordinates)}
                         path={routePath}

@@ -129,10 +129,10 @@ export default function OperatorDashboard() {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-gradient-to-br from-emerald-50/50 via-white to-teal-50/50 p-6 flex items-center justify-center">
+            <div className="min-h-screen bg-slate-50 p-6 flex items-center justify-center">
                 <div className="text-center">
                     <div className="w-16 h-16 border-4 border-emerald-200 border-t-emerald-600 rounded-full animate-spin mx-auto mb-4"></div>
-                    <p className="text-gray-600">Loading your route...</p>
+                    <p className="text-slate-600">Loading your route...</p>
                 </div>
             </div>
         );
@@ -144,18 +144,18 @@ export default function OperatorDashboard() {
         statusConfig.pending;
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-emerald-50/50 via-white to-teal-50/50 p-6 space-y-8">
+        <div className="min-h-screen bg-slate-50 p-6 space-y-8">
             {/* Header */}
             <div className="flex items-center justify-between">
                 <div>
-                    <h1 className="text-3xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+                    <h1 className="text-3xl font-bold text-slate-900">
                         My Route
                     </h1>
-                    <p className="text-gray-600 mt-1">
+                    <p className="text-slate-600 mt-1">
                         Track and manage your assigned collection route
                     </p>
                 </div>
-                <div className="flex items-center gap-3 text-sm text-gray-600">
+                <div className="flex items-center gap-3 text-sm text-slate-600">
                     <Clock className="w-4 h-4" />
                     <span suppressHydrationWarning>
                         {new Date().toLocaleDateString()}
@@ -244,14 +244,14 @@ export default function OperatorDashboard() {
                     {/* Route Actions */}
                     <Card className="p-8">
                         <div className="flex items-center gap-3 mb-6">
-                            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
+                            <div className="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center">
                                 <Truck className="w-5 h-5 text-white" />
                             </div>
                             <div>
-                                <h2 className="text-xl font-semibold text-gray-900">
+                                <h2 className="text-xl font-semibold text-slate-900">
                                     Route Controls
                                 </h2>
-                                <p className="text-gray-600 text-sm">
+                                <p className="text-slate-600 text-sm">
                                     Update your route status and progress
                                 </p>
                             </div>
@@ -263,7 +263,6 @@ export default function OperatorDashboard() {
                                     onClick={() => onStatus("active")}
                                     loading={isUpdating}
                                     size="lg"
-                                    className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700"
                                 >
                                     <Play className="w-4 h-4" />
                                     Start Route
@@ -275,7 +274,7 @@ export default function OperatorDashboard() {
                                     onClick={() => onStatus("completed")}
                                     loading={isUpdating}
                                     size="lg"
-                                    className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800"
+                                    className="bg-green-600 hover:bg-green-700"
                                 >
                                     <Flag className="w-4 h-4" />
                                     Complete Route
@@ -296,19 +295,19 @@ export default function OperatorDashboard() {
                     {/* Map */}
                     <Card className="p-8">
                         <div className="flex items-center gap-3 mb-6">
-                            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
+                            <div className="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center">
                                 <MapPin className="w-5 h-5 text-white" />
                             </div>
                             <div>
-                                <h2 className="text-xl font-semibold text-gray-900">
+                                <h2 className="text-xl font-semibold text-slate-900">
                                     Route Map
                                 </h2>
-                                <p className="text-gray-600 text-sm">
+                                <p className="text-slate-600 text-sm">
                                     Your assigned collection route and waypoints
                                 </p>
                             </div>
                         </div>
-                        <div className="rounded-xl overflow-hidden border border-gray-200 shadow-sm">
+                        <div className="rounded-xl overflow-hidden border border-slate-200 shadow-sm">
                             <MapView nodes={coords} path={coords} />
                         </div>
                     </Card>
@@ -317,14 +316,14 @@ export default function OperatorDashboard() {
                     {route.nodes && route.nodes.length > 0 && (
                         <Card className="p-8">
                             <div className="flex items-center gap-3 mb-6">
-                                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
+                                <div className="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center">
                                     <MapPin className="w-5 h-5 text-white" />
                                 </div>
                                 <div>
-                                    <h2 className="text-xl font-semibold text-gray-900">
+                                    <h2 className="text-xl font-semibold text-slate-900">
                                         Collection Points
                                     </h2>
-                                    <p className="text-gray-600 text-sm">
+                                    <p className="text-slate-600 text-sm">
                                         Waypoints in your assigned route
                                     </p>
                                 </div>

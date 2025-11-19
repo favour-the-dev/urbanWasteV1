@@ -1,5 +1,5 @@
 /* Mock-up fonts and material icons to align landing page styles */
-@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Noto+Sans:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,400,0,0");
 @import "tailwindcss";
 @import "tw-animate-css";
@@ -91,9 +91,9 @@
     --text-muted-dark: #9ca3af;
 }
 
-/* Font family defaults to match the mock-up: Noto Sans for body, Space Grotesk for headings */
+/* Font family defaults: Inter for body, Space Grotesk for headings */
 body {
-    font-family: "Noto Sans", system-ui, -apple-system, sans-serif;
+    font-family: "Inter", system-ui, -apple-system, sans-serif;
 }
 
 h1,
@@ -200,12 +200,12 @@ h6 {
         animation: slideIn 0.3s ease-out;
     }
 
-    /* Gradient text utilities */
+    /* Gradient text utilities - use sparingly */
     .gradient-text-primary {
-        @apply bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent;
+        @apply text-emerald-600;
     }
 
     .gradient-text-secondary {
-        @apply bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent;
+        @apply text-blue-600;
     }
 }

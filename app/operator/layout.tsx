@@ -41,7 +41,7 @@ export default function OperatorLayout({ children }: { children: ReactNode }) {
                         </div>
                         <div>
                             <h1 className="text-base font-bold text-gray-900">
-                                UrbanWaste
+                                Ecoroute
                             </h1>
                             <p className="text-xs text-emerald-600 font-medium">
                                 Operator
@@ -87,7 +87,7 @@ export default function OperatorLayout({ children }: { children: ReactNode }) {
                         </div>
                         <div>
                             <h1 className="text-lg font-bold text-gray-900">
-                                UrbanWaste
+                                Ecoroute
                             </h1>
                             <p className="text-xs text-emerald-600 font-medium">
                                 Field Operator
@@ -103,7 +103,7 @@ export default function OperatorLayout({ children }: { children: ReactNode }) {
                             </div>
                             <div>
                                 <h1 className="text-lg font-bold text-gray-900">
-                                    UrbanWaste
+                                    Ecoroute
                                 </h1>
                                 <p className="text-xs text-emerald-600 font-medium">
                                     Field Operator

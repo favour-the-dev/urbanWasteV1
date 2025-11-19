@@ -164,13 +164,13 @@ export default function AdminRoutesPage() {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-emerald-50/50 via-white to-teal-50/50 p-6 space-y-8">
+        <div className="min-h-screen bg-slate-50 p-6 space-y-8">
             <div className="flex items-center justify-between">
                 <div>
-                    <h1 className="text-3xl font-bold gradient-text-primary">
+                    <h1 className="text-3xl font-bold text-slate-900">
                         Routes
                     </h1>
-                    <p className="text-gray-600 mt-1">
+                    <p className="text-slate-600 mt-1">
                         Compute and preview routes between collection points
                     </p>
                 </div>
@@ -178,14 +178,14 @@ export default function AdminRoutesPage() {
 
             <Card className="p-6">
                 <div className="flex items-center gap-3 mb-6">
-                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
+                    <div className="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center">
                         <Navigation className="w-5 h-5 text-white" />
                     </div>
                     <div>
-                        <h2 className="text-xl font-semibold text-gray-900">
+                        <h2 className="text-xl font-semibold text-slate-900">
                             Compute Optimized Route
                         </h2>
-                        <p className="text-sm text-gray-600">
+                        <p className="text-sm text-slate-600">
                             Select nodes and compute the shortest path
                         </p>
                     </div>
@@ -330,14 +330,14 @@ export default function AdminRoutesPage() {
             {/* Existing Routes */}
             <Card className="p-6">
                 <div className="flex items-center gap-3 mb-6">
-                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center">
+                    <div className="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center">
                         <RouteIcon className="w-5 h-5 text-white" />
                     </div>
                     <div>
-                        <h2 className="text-xl font-semibold text-gray-900">
+                        <h2 className="text-xl font-semibold text-slate-900">
                             Assigned Routes
                         </h2>
-                        <p className="text-sm text-gray-600">
+                        <p className="text-sm text-slate-600">
                             All routes assigned to operators
                         </p>
                     </div>

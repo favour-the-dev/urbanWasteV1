@@ -82,7 +82,7 @@ export default function CitizenDashboard() {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-gradient-to-br from-purple-50/50 via-white to-pink-50/50 flex items-center justify-center p-6">
+            <div className="min-h-screen bg-slate-50 flex items-center justify-center p-6">
                 <LoadingSpinner size="lg" text="Loading your dashboard..." />
             </div>
         );
@@ -93,15 +93,13 @@ export default function CitizenDashboard() {
             title: "Total Reports",
             value: stats.total,
             icon: FileText,
-            color: "from-purple-500 to-pink-600",
-            bgColor: "bg-purple-100",
-            textColor: "text-purple-600",
+            bgColor: "bg-emerald-100",
+            textColor: "text-emerald-600",
         },
         {
             title: "Pending",
             value: stats.pending,
             icon: Clock,
-            color: "from-orange-500 to-red-600",
             bgColor: "bg-orange-100",
             textColor: "text-orange-600",
         },
@@ -109,7 +107,6 @@ export default function CitizenDashboard() {
             title: "Under Review",
             value: stats.reviewing,
             icon: TrendingUp,
-            color: "from-blue-500 to-cyan-600",
             bgColor: "bg-blue-100",
             textColor: "text-blue-600",
         },
@@ -117,14 +114,13 @@ export default function CitizenDashboard() {
             title: "Resolved",
             value: stats.resolved,
             icon: CheckCircle,
-            color: "from-green-500 to-emerald-600",
             bgColor: "bg-green-100",
             textColor: "text-green-600",
         },
     ];
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-purple-50/50 via-white to-pink-50/50 p-6 space-y-8">
+        <div className="min-h-screen bg-slate-50 p-6 space-y-8">
             {/* Header */}
             <motion.div
                 initial={{ opacity: 0, y: -20 }}
@@ -132,14 +128,14 @@ export default function CitizenDashboard() {
                 className="flex items-center justify-between"
             >
                 <div>
-                    <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                    <h1 className="text-3xl font-bold text-slate-900">
                         Welcome Back!
                     </h1>
-                    <p className="text-gray-600 mt-1">
+                    <p className="text-slate-600 mt-1">
                         Track your reports and help keep our city clean
                     </p>
                 </div>
-                <div className="flex items-center gap-3 text-sm text-gray-600">
+                <div className="flex items-center gap-3 text-sm text-slate-600">
                     <Clock className="w-4 h-4" />
                     <span suppressHydrationWarning>
                         {new Date().toLocaleDateString()}
@@ -159,17 +155,19 @@ export default function CitizenDashboard() {
                         <Card className="p-6 hover:shadow-lg transition-shadow">
                             <div className="flex items-center justify-between">
                                 <div>
-                                    <p className="text-sm text-gray-600">
+                                    <p className="text-sm text-slate-600">
                                         {card.title}
                                     </p>
-                                    <p className="text-3xl font-bold text-gray-900 mt-2">
+                                    <p className="text-3xl font-bold text-slate-900 mt-2">
                                         {card.value}
                                     </p>
                                 </div>
                                 <div
-                                    className={`w-14 h-14 rounded-xl bg-gradient-to-br ${card.color} flex items-center justify-center`}
+                                    className={`w-14 h-14 rounded-xl ${card.bgColor} flex items-center justify-center`}
                                 >
-                                    <card.icon className="w-7 h-7 text-white" />
+                                    <card.icon
+                                        className={`w-7 h-7 ${card.textColor}`}
+                                    />
                                 </div>
                             </div>
                         </Card>
@@ -185,14 +183,14 @@ export default function CitizenDashboard() {
             >
                 <Card className="p-8">
                     <div className="flex items-center gap-3 mb-6">
-                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center">
+                        <div className="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center">
                             <FileText className="w-5 h-5 text-white" />
                         </div>
                         <div>
-                            <h2 className="text-xl font-semibold text-gray-900">
+                            <h2 className="text-xl font-semibold text-slate-900">
                                 Recent Reports
                             </h2>
-                            <p className="text-sm text-gray-600">
+                            <p className="text-sm text-slate-600">
                                 Your latest 5 submissions
                             </p>
                         </div>
@@ -200,11 +198,11 @@ export default function CitizenDashboard() {
 
                     {reports.length === 0 ? (
                         <div className="text-center py-12">
-                            <AlertCircle className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-                            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                            <AlertCircle className="w-16 h-16 text-slate-300 mx-auto mb-4" />
+                            <h3 className="text-lg font-semibold text-slate-900 mb-2">
                                 No Reports Yet
                             </h3>
-                            <p className="text-gray-600">
+                            <p className="text-slate-600">
                                 You haven't submitted any reports. Help us
                                 improve your community!
                             </p>
@@ -214,7 +212,7 @@ export default function CitizenDashboard() {
                             {reports.slice(0, 5).map((report) => (
                                 <div
                                     key={report._id}
-                                    className="flex items-center justify-between p-4 rounded-xl border border-gray-200 hover:border-purple-200 hover:bg-purple-50/50 transition-all"
+                                    className="flex items-center justify-between p-4 rounded-xl border border-slate-200 hover:border-emerald-200 hover:bg-emerald-50/50 transition-all"
                                 >
                                     <div className="flex items-center gap-4">
                                         <div

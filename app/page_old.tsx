@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import React from "react";
 import { motion } from "framer-motion";
 import Navbar from "../components/ui/Navbar";
@@ -17,9 +17,10 @@ import {
     History,
     Fuel,
     TreeDeciduous,
+    Sparkles,
+    Zap,
     Shield,
     BarChart3,
-    Navigation,
 } from "lucide-react";
 
 export default function EcorouteLanding() {
@@ -91,28 +92,32 @@ export default function EcorouteLanding() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="pt-24 pb-20 px-4 sm:px-6 lg:px-8 bg-slate-50"
+                className="pt-24 pb-20 px-4 sm:px-6 lg:px-8"
             >
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center max-w-4xl mx-auto">
                         <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-50 border border-emerald-200 rounded-full mb-8">
-                            <Route className="w-4 h-4 text-emerald-600" />
+                            <Sparkles className="w-4 h-4 text-emerald-600" />
                             <span className="text-sm font-medium text-emerald-700">
-                                Smart Waste Management
+                                Digitized Waste Management
                             </span>
                         </div>
 
-                        <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 text-slate-900">
-                            Ecoroute
+                        <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6">
+                            <span className="bg-gradient-to-r from-slate-900 via-emerald-800 to-teal-800 bg-clip-text text-transparent">
+                                Port Harcourt,
+                            </span>
+                            <br />
+                            <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+                                Optimized Waste Routes
+                            </span>
                         </h1>
-                        <p className="text-2xl md:text-3xl font-semibold text-emerald-600 mb-6">
-                            Optimized Waste Collection for Modern Cities
-                        </p>
 
                         <p className="text-xl text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed">
-                            Intelligent route planning powered by advanced
-                            algorithms, real-time data, and adaptive weights from
-                            weather and citizen feedback.
+                            An urban waste management system for the city of
+                            Port Harcourt. Powered by Dijkstra’s algorithm, GIS
+                            mapping, and adaptive weights from weather and
+                            citizen reports.
                         </p>
 
                         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -163,11 +168,11 @@ export default function EcorouteLanding() {
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
                         <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
-                            Built for Efficiency
+                            Built for Port Harcourt
                         </h2>
                         <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-                            Complete route planning, visualization, and analytics for
-                            city-scale operations.
+                            End-to-end route planning, visualization and
+                            analytics for city-scale operations.
                         </p>
                     </div>
 
@@ -179,9 +184,9 @@ export default function EcorouteLanding() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: i * 0.05, duration: 0.4 }}
-                                className="group p-8 bg-white rounded-2xl border border-slate-200 hover:border-emerald-300 hover:shadow-lg transition-all duration-300"
+                                className="group p-8 bg-gradient-to-b from-slate-50 to-white rounded-2xl border border-slate-200 hover:border-emerald-300 hover:shadow-xl transition-all duration-300 cursor-pointer"
                             >
-                                <div className="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                                <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                                     <feature.icon className="w-6 h-6 text-white" />
                                 </div>
                                 <h3 className="text-xl font-bold text-slate-900 mb-2">
@@ -203,7 +208,7 @@ export default function EcorouteLanding() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-50"
+                className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-50 to-white"
             >
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
@@ -217,26 +222,26 @@ export default function EcorouteLanding() {
 
                     <div className="grid md:grid-cols-3 gap-8 relative">
                         {/* Connection Lines */}
-                        <div className="hidden md:block absolute top-1/4 left-0 right-0 h-0.5 bg-emerald-200 -z-10" />
+                        <div className="hidden md:block absolute top-1/4 left-0 right-0 h-0.5 bg-gradient-to-r from-emerald-200 via-emerald-400 to-teal-400 -z-10" />
 
                         {[
                             {
                                 icon: MapPin,
                                 title: "Citizen + Sensor Inputs",
                                 desc: "Reports (full bins, road blocks) and weather feed into the graph",
-                                step: 1,
+                                color: "from-emerald-500 to-teal-600",
                             },
                             {
-                                icon: Navigation,
-                                title: "Algorithm Optimization",
+                                icon: Route,
+                                title: "Dijkstra’s Optimization",
                                 desc: "Shortest paths computed using adaptive edge weights",
-                                step: 2,
+                                color: "from-emerald-500 to-teal-600",
                             },
                             {
                                 icon: Truck,
                                 title: "Smart Dispatch",
                                 desc: "Operators receive routes and update status in real time",
-                                step: 3,
+                                color: "from-teal-500 to-teal-600",
                             },
                         ].map((step, i) => (
                             <motion.div
@@ -247,13 +252,15 @@ export default function EcorouteLanding() {
                                 transition={{ delay: i * 0.06, duration: 0.45 }}
                                 className="relative"
                             >
-                                <div className="bg-white rounded-2xl p-8 shadow-md hover:shadow-xl transition-all duration-300 border border-slate-100">
-                                    <div className="w-16 h-16 bg-emerald-600 rounded-2xl flex items-center justify-center mb-6 mx-auto">
+                                <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-slate-100">
+                                    <div
+                                        className={`w-16 h-16 bg-gradient-to-br ${step.color} rounded-2xl flex items-center justify-center mb-6 mx-auto`}
+                                    >
                                         <step.icon className="w-8 h-8 text-white" />
                                     </div>
                                     <div className="text-center">
                                         <div className="text-sm font-bold text-emerald-600 mb-2">
-                                            STEP {step.step}
+                                            STEP {i + 1}
                                         </div>
                                         <h3 className="text-2xl font-bold text-slate-900 mb-3">
                                             {step.title}
@@ -275,7 +282,7 @@ export default function EcorouteLanding() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="py-20 px-4 sm:px-6 lg:px-8 bg-white"
+                className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-emerald-50 to-white"
             >
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-10">
@@ -283,7 +290,8 @@ export default function EcorouteLanding() {
                             Live Routing Demo
                         </h2>
                         <p className="text-lg text-slate-600">
-                            Sample route visualization with computed optimal path
+                            A simple example over Port Harcourt using sample
+                            nodes and a computed path.
                         </p>
                     </div>
 
@@ -309,20 +317,20 @@ export default function EcorouteLanding() {
                         <div className="lg:col-span-2">
                             <div className="p-6 bg-white rounded-2xl border border-slate-200 shadow-sm">
                                 <h3 className="text-xl font-semibold text-slate-900 mb-3">
-                                    What you're seeing
+                                    What you’re seeing
                                 </h3>
                                 <ul className="space-y-3 text-slate-700 text-sm">
                                     <li>
-                                        • Emerald markers represent collection
-                                        points
+                                        • Emerald pins represent collection
+                                        points (nodes).
                                     </li>
                                     <li>
-                                        • Blue line shows the computed shortest
-                                        route
+                                        • Blue pins and line show the computed
+                                        shortest route.
                                     </li>
                                     <li>
-                                        • Start (green) and End (red) markers
-                                        highlight endpoints
+                                        • Start (green circle) and End (red
+                                        circle) highlight endpoints.
                                     </li>
                                 </ul>
                                 <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -354,7 +362,7 @@ export default function EcorouteLanding() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-50"
+                className="py-20 px-4 sm:px-6 lg:px-8 bg-white"
             >
                 <div className="max-w-7xl mx-auto">
                     <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -363,8 +371,8 @@ export default function EcorouteLanding() {
                                 Measurable Impact, Real Results
                             </h2>
                             <p className="text-xl text-slate-600 mb-8">
-                                Join forward-thinking cities transforming their waste
-                                management operations.
+                                Join forward-thinking cities already
+                                transforming their waste management operations.
                             </p>
 
                             <div className="space-y-4">
@@ -378,9 +386,9 @@ export default function EcorouteLanding() {
                                             delay: i * 0.05,
                                             duration: 0.35,
                                         }}
-                                        className="flex items-start gap-4 p-4 rounded-xl hover:bg-white transition-colors cursor-pointer group border border-transparent hover:border-slate-200"
+                                        className="flex items-start gap-4 p-4 rounded-xl hover:bg-slate-50 transition-colors cursor-pointer group"
                                     >
-                                        <div className="w-10 h-10 bg-emerald-600 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                                        <div className="w-10 h-10 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
                                             <benefit.icon className="w-5 h-5 text-white" />
                                         </div>
                                         <div>
@@ -397,9 +405,9 @@ export default function EcorouteLanding() {
                         </div>
 
                         <div className="relative">
-                            <div className="aspect-square rounded-3xl bg-slate-100 p-8 flex items-center justify-center border border-slate-200">
+                            <div className="aspect-square rounded-3xl bg-gradient-to-br from-emerald-100 via-teal-50 to-blue-100 p-8 flex items-center justify-center">
                                 <div className="text-center">
-                                    <div className="w-32 h-32 bg-white rounded-3xl shadow-xl flex items-center justify-center mx-auto mb-6 border border-slate-100">
+                                    <div className="w-32 h-32 bg-white rounded-3xl shadow-xl flex items-center justify-center mx-auto mb-6">
                                         <TrendingUp className="w-16 h-16 text-emerald-600" />
                                     </div>
                                     <div className="text-5xl font-bold text-slate-900 mb-2">
@@ -410,6 +418,8 @@ export default function EcorouteLanding() {
                                     </div>
                                 </div>
                             </div>
+                            <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl opacity-20 blur-2xl" />
+                            <div className="absolute -top-6 -left-6 w-32 h-32 bg-gradient-to-br from-blue-500 to-emerald-500 rounded-2xl opacity-20 blur-2xl" />
                         </div>
                     </div>
                 </div>
@@ -421,21 +431,24 @@ export default function EcorouteLanding() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-900"
+                className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-900 via-emerald-900 to-teal-900 relative overflow-hidden"
             >
-                <div className="max-w-4xl mx-auto text-center">
+                <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMzLjMxNCAwIDYgMi42ODYgNiA2cy0yLjY4NiA2LTYgNi02LTIuNjg2LTYtNiAyLjY4Ni02IDYtNnoiIHN0cm9rZT0iIzEwYjk4MSIgc3Ryb2tlLXdpZHRoPSIyIiBvcGFjaXR5PSIuMSIvPjwvZz48L3N2Zz4=')] opacity-10" />
+
+                <div className="max-w-4xl mx-auto text-center relative z-10">
                     <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
                         Ready to Optimize Your Operations?
                     </h2>
-                    <p className="text-xl text-slate-300 mb-10 max-w-2xl mx-auto">
-                        Join leading cities worldwide. Start your journey today.
+                    <p className="text-xl text-emerald-100 mb-10 max-w-2xl mx-auto">
+                        Join leading cities worldwide. Start your free trial
+                        today—no credit card required.
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                         <Link href="/signup" className="inline-block">
                             <Button
                                 size="lg"
-                                className="px-10 py-5 bg-white text-slate-900 hover:bg-slate-100"
+                                className="px-10 py-5 bg-white text-slate-900"
                             >
                                 Get Started
                                 <ArrowRight className="w-5 h-5 ml-2" />
@@ -445,14 +458,14 @@ export default function EcorouteLanding() {
                             <Button
                                 variant="outline"
                                 size="lg"
-                                className="px-10 py-5 border-slate-600 text-white hover:bg-slate-800 hover:text-white hover:border-slate-500"
+                                className="px-10 py-5 border-white/50 text-white hover:bg-white/10 hover:text-white"
                             >
                                 Log in
                             </Button>
                         </Link>
                     </div>
 
-                    <div className="mt-12 flex items-center justify-center gap-8 text-sm text-slate-400">
+                    <div className="mt-12 flex items-center justify-center gap-8 text-sm text-emerald-100">
                         <div className="flex items-center gap-2">
                             <CheckCircle className="w-5 h-5" />
                             <span>Easy setup</span>
@@ -464,7 +477,6 @@ export default function EcorouteLanding() {
                     </div>
                 </div>
             </motion.section>
-
             {/* Footer Component */}
             <Footer />
         </div>
